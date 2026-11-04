@@ -4,5 +4,18 @@
   "createdAt": "2026-11-04T12:05:55.762Z",
   "filename": "589de411-448c-4f60-b34c-5081d53dfda5.json",
   "geminiStarted": false,
-  "messages": []
+  "messages": [
+    {
+      "id": "e212d4dd-233d-4998-bbe4-2866eea0c635",
+      "role": "user",
+      "content": "I want a website for Aap Sarkar and CSC Seva Kendra in which I can provide all the facilities of Aap Sarkar Setu Kendra. For this, I need an admin portal as well. I want a website for Aap Sarkar and CSC Seva Kendra in which I can provide all the facilities of Aap Sarkar Setu Kendra. For this, I need an admin portal as well. Also, mobile number based user registration for creating user ID password base and login for customers should also be made available on the website as well as the facilities that customers want to apply for.They should have the option to upload documents which should be in both PDF and JPG format and also how many QR codes should be shown for payment or which system is my bank's.And the amount should be paid on that or code and the money should be credited to my account. Also, the tracking number should be available to the customers regarding the scheme they have applied for.This website should also have a customer care number available, the number I am talking about is 9834005538 and the name of the website is Easy Online Services.This website should have an attractive design and all copyrights should be protected by me. I should also have the option to add features to this website and that I need to create a website that has everything I need, including the ability to change the amount of services, and an invoice portal.",
+      "status": "pending",
+      "model": "gemini-3.8-flash-high",
+      "client_type": "gemini-bridge",
+      "parent_message_id": null,
+      "created_at": "2026-11-04T12:06:51.187Z",
+      "sender": "ios",
+      "is_cancelled": false
+    }
+  ]
 }
