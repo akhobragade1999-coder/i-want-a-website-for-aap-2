@@ -1,11 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mr" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <title>Easy Online Services</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Easy Online Services | आपले सरकार व सीएससी महा-ई-सेवा केंद्र</title>
+  
+  <!-- Meta Tags for Authenticity, SEO & OpenGraph -->
+  <meta name="description" content="Easy Online Services - अधिकृत आपले सरकार सेतू व सीएससी सेवा केंद्र. उत्पन्न दाखला, जात प्रमाणपत्र, अधिवास, लाडकी बहीण योजना, पॅन कार्ड व शेतकरी योजना ऑनलाइन मिळवा. हेल्पलाईन: 9834005538" />
+  <meta name="keywords" content="Easy Online Services, Aaple Sarkar, CSC Seva Kendra, Setu Kendra, Income Certificate, Caste Certificate, Domicile, Ladki Bahin Yojana, PM Kisan, Maharashtra, Helpline 9834005538" />
+  <meta name="author" content="Easy Online Services" />
+  <meta name="copyright" content="Easy Online Services - All Rights Reserved 2026" />
+
+  <!-- Google Fonts: Poppins & Noto Sans Devanagari for authentic Marathi typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'Noto Sans Devanagari', 'sans-serif'],
+            devanagari: ['Noto Sans Devanagari', 'sans-serif']
+          },
+          colors: {
+            tiranga: {
+              saffron: '#FF671F',
+              green: '#046A38',
+              navy: '#06038D'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- High-Speed QR Code Generator -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+
+  <!-- Celebratory Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="css/custom.css" />
 </head>
-<body>
-  <h1>Easy Online Services - Aaple Sarkar & CSC Kendra</h1>
-  <p>Customer Care: 9834005538</p>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-orange-500 selection:text-white min-h-screen flex flex-col">
+  
+  <!-- Single Page Reactive App Mount Container -->
+  <div id="app-root" class="flex-grow flex flex-col"></div>
+
+  <!-- Application Modules -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/qr.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
