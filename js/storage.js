@@ -3,6 +3,13 @@
  * Handles reactive state and persistent local storage
  */
 
+const _DATA_SRC = (typeof window !== 'undefined' && window.DEFAULT_SETTINGS) ? window : (typeof require !== 'undefined' ? require('./data.js') : {});
+const _DEFAULT_SETTINGS = (typeof DEFAULT_SETTINGS !== 'undefined' ? DEFAULT_SETTINGS : _DATA_SRC.DEFAULT_SETTINGS) || {};
+const _DEFAULT_SERVICES = (typeof DEFAULT_SERVICES !== 'undefined' ? DEFAULT_SERVICES : _DATA_SRC.DEFAULT_SERVICES) || [];
+const _INITIAL_APPLICATIONS = (typeof INITIAL_APPLICATIONS !== 'undefined' ? INITIAL_APPLICATIONS : _DATA_SRC.INITIAL_APPLICATIONS) || [];
+const _INITIAL_INVOICES = (typeof INITIAL_INVOICES !== 'undefined' ? INITIAL_INVOICES : _DATA_SRC.INITIAL_INVOICES) || [];
+const _INITIAL_USERS = (typeof INITIAL_USERS !== 'undefined' ? INITIAL_USERS : _DATA_SRC.INITIAL_USERS) || [];
+
 const StorageManager = {
   KEYS: {
     SETTINGS: 'eos_settings',
@@ -17,19 +24,19 @@ const StorageManager = {
 
   init() {
     if (!localStorage.getItem(this.KEYS.SETTINGS)) {
-      localStorage.setItem(this.KEYS.SETTINGS, JSON.stringify(DEFAULT_SETTINGS));
+      localStorage.setItem(this.KEYS.SETTINGS, JSON.stringify(_DEFAULT_SETTINGS));
     }
     if (!localStorage.getItem(this.KEYS.SERVICES)) {
-      localStorage.setItem(this.KEYS.SERVICES, JSON.stringify(DEFAULT_SERVICES));
+      localStorage.setItem(this.KEYS.SERVICES, JSON.stringify(_DEFAULT_SERVICES));
     }
     if (!localStorage.getItem(this.KEYS.APPLICATIONS)) {
-      localStorage.setItem(this.KEYS.APPLICATIONS, JSON.stringify(INITIAL_APPLICATIONS));
+      localStorage.setItem(this.KEYS.APPLICATIONS, JSON.stringify(_INITIAL_APPLICATIONS));
     }
     if (!localStorage.getItem(this.KEYS.INVOICES)) {
-      localStorage.setItem(this.KEYS.INVOICES, JSON.stringify(INITIAL_INVOICES));
+      localStorage.setItem(this.KEYS.INVOICES, JSON.stringify(_INITIAL_INVOICES));
     }
     if (!localStorage.getItem(this.KEYS.USERS)) {
-      localStorage.setItem(this.KEYS.USERS, JSON.stringify(INITIAL_USERS));
+      localStorage.setItem(this.KEYS.USERS, JSON.stringify(_INITIAL_USERS));
     }
     if (!localStorage.getItem(this.KEYS.LANGUAGE)) {
       localStorage.setItem(this.KEYS.LANGUAGE, 'mr'); // Default Marathi for Aaple Sarkar Kendra
@@ -39,9 +46,9 @@ const StorageManager = {
   // Settings
   getSettings() {
     try {
-      return JSON.parse(localStorage.getItem(this.KEYS.SETTINGS)) || DEFAULT_SETTINGS;
+      return JSON.parse(localStorage.getItem(this.KEYS.SETTINGS)) || _DEFAULT_SETTINGS;
     } catch (e) {
-      return DEFAULT_SETTINGS;
+      return _DEFAULT_SETTINGS;
     }
   },
 
@@ -52,9 +59,9 @@ const StorageManager = {
   // Services
   getServices() {
     try {
-      return JSON.parse(localStorage.getItem(this.KEYS.SERVICES)) || DEFAULT_SERVICES;
+      return JSON.parse(localStorage.getItem(this.KEYS.SERVICES)) || _DEFAULT_SERVICES;
     } catch (e) {
-      return DEFAULT_SERVICES;
+      return _DEFAULT_SERVICES;
     }
   },
 
@@ -89,9 +96,9 @@ const StorageManager = {
   // Applications
   getApplications() {
     try {
-      return JSON.parse(localStorage.getItem(this.KEYS.APPLICATIONS)) || INITIAL_APPLICATIONS;
+      return JSON.parse(localStorage.getItem(this.KEYS.APPLICATIONS)) || _INITIAL_APPLICATIONS;
     } catch (e) {
-      return INITIAL_APPLICATIONS;
+      return _INITIAL_APPLICATIONS;
     }
   },
 
@@ -142,9 +149,9 @@ const StorageManager = {
   // Invoices
   getInvoices() {
     try {
-      return JSON.parse(localStorage.getItem(this.KEYS.INVOICES)) || INITIAL_INVOICES;
+      return JSON.parse(localStorage.getItem(this.KEYS.INVOICES)) || _INITIAL_INVOICES;
     } catch (e) {
-      return INITIAL_INVOICES;
+      return _INITIAL_INVOICES;
     }
   },
 
@@ -162,9 +169,9 @@ const StorageManager = {
   // Users
   getUsers() {
     try {
-      return JSON.parse(localStorage.getItem(this.KEYS.USERS)) || INITIAL_USERS;
+      return JSON.parse(localStorage.getItem(this.KEYS.USERS)) || _INITIAL_USERS;
     } catch (e) {
-      return INITIAL_USERS;
+      return _INITIAL_USERS;
     }
   },
 
