@@ -221,3 +221,11 @@ const StorageManager = {
 
 // Initialize immediately on load
 StorageManager.init();
+
+if (typeof window !== 'undefined') {
+  window.StorageManager = StorageManager;
+}
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { StorageManager };
+}
+

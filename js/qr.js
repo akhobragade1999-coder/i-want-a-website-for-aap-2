@@ -95,3 +95,11 @@ const QRUtil = {
     };
   }
 };
+
+if (typeof window !== 'undefined') {
+  window.QRUtil = QRUtil;
+}
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { QRUtil };
+}
+
