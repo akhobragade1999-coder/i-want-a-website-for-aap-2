@@ -1,5 +1,7 @@
 # What a project can make again, and nobody needs to keep.
 node_modules/
+dist/
+.vercel/
 .venv/
 venv/
 __pycache__/
