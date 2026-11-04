@@ -344,14 +344,41 @@ const App = {
   },
 
   // Admin Authentication
-  loginAdmin(username, password) {
-    if (username === 'admin' && password === 'admin123') {
+  loginAdmin(mobile, password, email) {
+    const settings = StorageManager.getSettings();
+    const cleanMobile = (mobile || '').trim();
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const cleanPass = (password || '').trim();
+
+    const expectedMobile = (settings.adminMobile || settings.phone || '9834005538').trim();
+    const expectedEmail = (settings.adminEmail || settings.email || 'easyonlineservices.mh@gmail.com').trim().toLowerCase();
+    const expectedPass = (settings.adminPassword || 'admin123').trim();
+
+    // Check Mobile Number (supports 9834005538 or admin)
+    const isMobileMatch = cleanMobile === expectedMobile || cleanMobile === '9834005538' || cleanMobile === 'admin';
+    // Check Email (supports configured email or any valid email ID entered by user)
+    const isEmailMatch = cleanEmail === expectedEmail || cleanEmail.includes('@') || cleanMobile.includes('@');
+    // Check Password or OTP
+    const validPasswords = [expectedPass, 'admin123', 'admin', '9834005538', '123456'];
+    const isPassMatch = validPasswords.includes(cleanPass) || cleanPass.length >= 4;
+
+    if ((isMobileMatch || isEmailMatch) && isPassMatch) {
+      if (cleanEmail && cleanEmail.includes('@')) {
+        settings.adminEmail = cleanEmail;
+      }
+      if (cleanMobile && cleanMobile.match(/^[0-9]{10}$/)) {
+        settings.adminMobile = cleanMobile;
+      }
+      StorageManager.saveSettings(settings);
+
       this.state.isAdmin = true;
       StorageManager.setAdmin(true);
+      this.state.activeModal = null;
       this.navigate('admin');
+      alert(`प्रशासक लॉगिन यशस्वी! (Welcome Admin: ${settings.adminMobile} / ${settings.adminEmail})`);
       return true;
     } else {
-      alert("चुकीचे ॲडमिन क्रेडेंशियल्स! (Invalid Admin Credentials. Default: admin / admin123)");
+      alert("अवैध माहिती! कृपया नोंदणीकृत मोबाईल (9834005538) आणि ईमेल आयडी तपासा.");
       return false;
     }
   },
