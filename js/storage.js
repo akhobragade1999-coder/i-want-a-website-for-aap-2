@@ -25,6 +25,18 @@ const StorageManager = {
   init() {
     if (!localStorage.getItem(this.KEYS.SETTINGS)) {
       localStorage.setItem(this.KEYS.SETTINGS, JSON.stringify(_DEFAULT_SETTINGS));
+    } else {
+      // Ensure admin credentials exist
+      try {
+        const s = JSON.parse(localStorage.getItem(this.KEYS.SETTINGS));
+        if (s) {
+          let updated = false;
+          if (!s.adminMobile) { s.adminMobile = "9834005538"; updated = true; }
+          if (!s.adminEmail) { s.adminEmail = "easyonlineservices.mh@gmail.com"; updated = true; }
+          if (!s.adminPassword) { s.adminPassword = "admin123"; updated = true; }
+          if (updated) localStorage.setItem(this.KEYS.SETTINGS, JSON.stringify(s));
+        }
+      } catch (e) {}
     }
     if (!localStorage.getItem(this.KEYS.SERVICES)) {
       localStorage.setItem(this.KEYS.SERVICES, JSON.stringify(_DEFAULT_SERVICES));
