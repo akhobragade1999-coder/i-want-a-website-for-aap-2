@@ -2245,10 +2245,40 @@ const App = {
           newSettings.accountNo = this.accountNo.value.trim();
           newSettings.ifscCode = this.ifscCode.value.trim();
           newSettings.noticeText = this.noticeText.value.trim();
+          newSettings.adminMobile = this.adminMobile.value.trim();
+          newSettings.adminEmail = this.adminEmail.value.trim();
+          if (this.adminPassword && this.adminPassword.value.trim()) {
+            newSettings.adminPassword = this.adminPassword.value.trim();
+          }
           StorageManager.saveSettings(newSettings);
-          alert('बँक व हेल्पलाईन सेटिंग्स यशस्वीरित्या जतन करण्यात आल्या!');
+          alert('बँक, हेल्पलाईन व ॲडमिन लॉगिन सेटिंग्स यशस्वीरित्या जतन करण्यात आल्या!');
           App.render();
         " class="space-y-4 text-xs font-semibold text-slate-700">
+          <!-- Admin Credentials Card -->
+          <div class="bg-slate-900 text-white p-5 rounded-2xl border border-slate-800 space-y-3 mb-6">
+            <div class="flex items-center gap-2 text-amber-400 font-bold text-sm border-b border-slate-800 pb-2">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+              <span>प्रशासक लॉगिन क्रेडेन्शियल व्यवस्थापन (Admin Login Credentials)</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block mb-1 text-slate-300">Admin मोबाईल नंबर *</label>
+                <input type="tel" name="adminMobile" maxlength="10" value="${settings.adminMobile || '9834005538'}" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 font-mono font-bold text-amber-400 text-sm" required />
+              </div>
+              <div>
+                <label class="block mb-1 text-slate-300">Admin ईमेल आयडी *</label>
+                <input type="email" name="adminEmail" value="${settings.adminEmail || 'easyonlineservices.mh@gmail.com'}" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm" required />
+              </div>
+              <div>
+                <label class="block mb-1 text-slate-300">Admin पासवर्ड (Password) *</label>
+                <input type="password" name="adminPassword" value="${settings.adminPassword || 'admin123'}" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 font-bold text-white text-sm" required />
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-400">
+              * या मोबाईल नंबर (9834005538) व ईमेल आयडीने ॲडमिन पॅनेलमध्ये लॉगिन करता येईल.
+            </p>
+          </div>
+
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label class="block mb-1">अधिकृत UPI आयडी (Primary UPI ID for QR) *</label>
@@ -2629,37 +2659,100 @@ const App = {
   },
 
   renderAdminLoginModal() {
+    const settings = StorageManager.getSettings();
+
     return `
-      <div class="bg-slate-950 text-white rounded-3xl shadow-2xl max-w-sm w-full p-6 sm:p-8 border border-slate-800 relative">
+      <div class="bg-slate-950 text-white rounded-3xl shadow-2xl max-w-md w-full p-6 sm:p-8 border border-slate-800 relative">
         <button onclick="App.state.activeModal = null; App.render();" class="absolute top-4 right-4 text-slate-400 hover:text-white">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
 
         <div class="text-center mb-6">
-          <div class="w-12 h-12 bg-amber-500 text-slate-950 rounded-2xl flex items-center justify-center mx-auto mb-2 font-black text-xl">
+          <div class="w-12 h-12 bg-amber-500 text-slate-950 rounded-2xl flex items-center justify-center mx-auto mb-2 font-black text-xl shadow">
             <i data-lucide="shield" class="w-6 h-6"></i>
           </div>
-          <h3 class="text-xl font-black">प्रशासक लॉगिन (Admin)</h3>
-          <p class="text-xs text-slate-400 mt-1">केंद्र संचालक व ऑपरेटर प्रवेश</p>
+          <h3 class="text-xl font-black text-white">प्रशासक लॉगिन (Admin Portal)</h3>
+          <p class="text-xs text-slate-400 mt-1">केंद्र संचालक व ऑपरेटर अधिकृत प्रवेश</p>
         </div>
 
         <form onsubmit="
           event.preventDefault();
-          App.loginAdmin(this.username.value.trim(), this.password.value.trim());
+          App.loginAdmin(this.mobile.value.trim(), this.password.value.trim(), this.email.value.trim());
         " class="space-y-4 text-xs font-semibold">
+          <!-- Admin Mobile Number -->
           <div>
-            <label class="block mb-1 text-slate-300">Username *</label>
-            <input type="text" name="username" value="admin" class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm" required />
+            <label class="block mb-1 text-slate-300 flex items-center justify-between">
+              <span class="flex items-center gap-1.5">
+                <i data-lucide="phone" class="w-3.5 h-3.5 text-amber-400"></i>
+                <span>नोंदणीकृत मोबाईल नंबर (Admin Mobile Number) *</span>
+              </span>
+              <span class="text-[10px] text-emerald-400 font-mono font-bold">${settings.adminMobile || '9834005538'}</span>
+            </label>
+            <input 
+              type="tel" 
+              name="mobile" 
+              maxlength="10" 
+              value="${settings.adminMobile || '9834005538'}" 
+              placeholder="उदा. 9834005538" 
+              class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm font-mono font-bold focus:outline-none focus:ring-2 focus:ring-amber-500" 
+              required 
+            />
           </div>
 
+          <!-- Admin Email ID -->
           <div>
-            <label class="block mb-1 text-slate-300">Password *</label>
-            <input type="password" name="password" value="admin123" class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm" required />
+            <label class="block mb-1 text-slate-300 flex items-center justify-between">
+              <span class="flex items-center gap-1.5">
+                <i data-lucide="mail" class="w-3.5 h-3.5 text-amber-400"></i>
+                <span>नोंदणीकृत ईमेल आयडी (Admin Email ID) *</span>
+              </span>
+              <span class="text-[10px] text-amber-400 font-mono">Official Email</span>
+            </label>
+            <input 
+              type="email" 
+              name="email" 
+              value="${settings.adminEmail || 'easyonlineservices.mh@gmail.com'}" 
+              placeholder="उदा. easyonlineservices.mh@gmail.com" 
+              class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-amber-500" 
+              required 
+            />
           </div>
 
-          <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-black py-3 rounded-xl transition shadow text-sm">
-            Admin Portal मध्ये प्रवेश करा
+          <!-- Password / OTP -->
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="text-slate-300 flex items-center gap-1.5">
+                <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-400"></i>
+                <span>पासवर्ड / मोबाईल OTP *</span>
+              </label>
+              <span class="text-[10px] text-slate-400 font-mono">OTP: 123456 / admin123</span>
+            </div>
+            <input 
+              type="password" 
+              name="password" 
+              value="admin123" 
+              placeholder="पासवर्ड किंवा मोबाईल OTP टाका" 
+              class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm font-bold focus:outline-none focus:ring-2 focus:ring-amber-500" 
+              required 
+            />
+          </div>
+
+          <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-black py-3 rounded-xl transition shadow text-sm flex items-center justify-center gap-2">
+            <i data-lucide="log-in" class="w-4 h-4"></i>
+            <span>प्रशासक पोर्टल उघडा (Admin Sign In)</span>
           </button>
+
+          <!-- 1-Click Fast Access -->
+          <div class="p-2.5 bg-slate-900 rounded-xl border border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
+            <span>अधिकृत क्रेडेंशियल्स: <strong>${settings.adminMobile || '9834005538'}</strong></span>
+            <button 
+              type="button" 
+              onclick="App.loginAdmin('${settings.adminMobile || '9834005538'}', 'admin123', '${settings.adminEmail || 'easyonlineservices.mh@gmail.com'}')" 
+              class="text-amber-400 font-bold underline hover:text-amber-300"
+            >
+              १-क्लिक लॉगिन
+            </button>
+          </div>
         </form>
       </div>
     `;
