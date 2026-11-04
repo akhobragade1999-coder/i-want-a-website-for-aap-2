@@ -83,8 +83,10 @@ const QRUtil = {
    * Fallback generator using QR image
    */
   renderFallback(canvasElement, text, width = 220) {
+    if (typeof Image === 'undefined' || !canvasElement) return;
     const encoded = encodeURIComponent(text);
     const img = new Image();
+
     img.crossOrigin = 'Anonymous';
     img.src = `https://api.qrserver.com/v1/create-qr-code/?size=${width}x${width}&data=${encoded}&color=0F2744&bgcolor=FFFFFF&margin=10`;
     img.onload = () => {
