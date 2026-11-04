@@ -64,6 +64,18 @@
       "created_at": "2026-11-04T12:59:20.611Z",
       "sender": "macOS",
       "is_cancelled": false
+    },
+    {
+      "id": "7ea5016a-57da-487d-be37-ba6008285547",
+      "role": "user",
+      "content": "माझ्या Website Project मध्ये Vite + React वापरले आहे.\n\nमाझ्या package.json मध्ये आवश्यक Scripts तपासा आणि खालील Scripts जोडा:\n\n\"scripts\": {\n\"dev\": \"vite\",\n\"build\": \"vite build\",\n\"preview\": \"vite preview\"\n}\n\nतसेच:\n\n1. सर्व Dependencies तपासा.\n2. Vite आणि React Configuration तपासा.\n3. index.html तपासा.\n4. npm install चालवा.\n5. npm run build चालवून Build Test करा.\n6. Build मध्ये Error असल्यास दुरुस्त करा.\n7. कोणतीही विद्यमान Website Design किंवा Functionality बदलू नका.\n8. मला बदललेल्या Files ची माहिती द्या.\n\nProject Vercel Deployment साठी तयार करा.",
+      "status": "pending",
+      "model": "auto",
+      "client_type": "gemini-bridge",
+      "parent_message_id": null,
+      "created_at": "2026-11-04T13:14:22.685Z",
+      "sender": "ios",
+      "is_cancelled": false
     }
   ]
 }
