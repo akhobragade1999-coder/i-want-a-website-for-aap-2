@@ -3086,6 +3086,13 @@ const App = {
 };
 
 // Initialize App on DOMContentLoaded
-window.addEventListener('DOMContentLoaded', () => {
-  App.init();
-});
+if (typeof window !== 'undefined') {
+  window.App = App;
+  window.addEventListener('DOMContentLoaded', () => {
+    App.init();
+  });
+}
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { App };
+}
+

@@ -673,6 +673,15 @@ const INITIAL_USERS = [
     password: "user123",
     createdAt: "2026-11-01T09:00:00Z"
   },
+  {
+    id: "usr-2",
+    name: "सुनिता गायकवाड (Sunita Gaikwad)",
+    mobile: "9822114455",
+    password: "user123",
+    createdAt: "2026-11-03T11:00:00Z"
+  }
+];
+
 // Export to window/global scope
 if (typeof window !== 'undefined') {
   window.DEFAULT_SETTINGS = DEFAULT_SETTINGS;
@@ -684,4 +693,5 @@ if (typeof window !== 'undefined') {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { DEFAULT_SETTINGS, DEFAULT_SERVICES, INITIAL_APPLICATIONS, INITIAL_INVOICES, INITIAL_USERS };
 }
+
 
